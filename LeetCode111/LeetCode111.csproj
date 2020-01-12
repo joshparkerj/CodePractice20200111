@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DeepestSum.cs" />
     <Compile Include="MergeBinaryTrees.cs" />
+    <Compile Include="MinFlipsClass.cs" />
     <Compile Include="NoZero.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

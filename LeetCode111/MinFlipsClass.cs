@@ -1,12 +1,12 @@
 ﻿namespace LeetCode111
 {
-    class MinFlips
+    class MinFlipsClass
     {
         public int MinFlips(int a, int b, int c)
         {
             int flips = 0;
 
-            while (c > 0)
+            while (a > 0 || b > 0 || c > 0)
             {
                 if (c % 2 == 1 && a % 2 != 1 && b % 2 != 1)
                 {

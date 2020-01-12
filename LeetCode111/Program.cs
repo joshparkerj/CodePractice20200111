@@ -7,13 +7,11 @@ namespace LeetCode111
     {
         static void Main(string[] args)
         {
-            NoZero nz = new NoZero();
-
-            WriteInts(nz.GetNoZeroIntegers(2));
-            WriteInts(nz.GetNoZeroIntegers(11));
-            WriteInts(nz.GetNoZeroIntegers(10000));
-            WriteInts(nz.GetNoZeroIntegers(69));
-            WriteInts(nz.GetNoZeroIntegers(1010));
+            MinFlipsClass mf = new MinFlipsClass();
+            Console.WriteLine(mf.MinFlips(2, 6, 5));
+            Console.WriteLine(mf.MinFlips(4, 2, 7));
+            Console.WriteLine(mf.MinFlips(1, 2, 3));
+            Console.WriteLine(mf.MinFlips(8, 3, 5)); // Expected 3
 
             Console.ReadKey();
         }
