@@ -46,6 +46,7 @@
     <Compile Include="DeepestSum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangeSum.cs" />
     <Compile Include="TreeNode.cs" />
   </ItemGroup>
   <ItemGroup>

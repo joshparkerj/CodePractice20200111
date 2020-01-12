@@ -20,13 +20,52 @@ namespace LeetCode111
 
             TreeNode testRoot4 = TreeGen(biglist.ToArray());
 
+            TreeNode testBst1 = BstGen(new int[] { 10, 5, 15, 3, 7, 18 });
+            TreeNode testBst2 = BstGen(new int[] { 10, 5, 15, 3, 7, 13, 18, 1, 6 });
+            TreeNode testBst3 = BstGen(new int[] { -5, -6, -1, -7, -19, -9 });
+            TreeNode testBst4 = BstGen(new int[] { -9, 18, 19, -10, 0, 1, 2, 4, 3 });
+
+            List<int> biglist2 = new List<int>();
+            for (int i = 0; i < 10000; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    biglist2.Add(5000 - i);
+                }
+                else
+                {
+                    biglist2.Add(5000 + i);
+                }
+            }
+
+            TreeNode testBst5 = BstGen(biglist2.ToArray());
+
             DeepestSum ds = new DeepestSum();
+
+            RangeSum rs = new RangeSum();
 
             Console.WriteLine(ds.DeepestLeavesSum(testRoot0));
             Console.WriteLine(ds.DeepestLeavesSum(testRoot1));
             Console.WriteLine(ds.DeepestLeavesSum(testRoot2));
             Console.WriteLine(ds.DeepestLeavesSum(testRoot3));
             Console.WriteLine(ds.DeepestLeavesSum(testRoot4));
+
+            //Console.WriteLine("\ntest bst 1: ");
+            //PrintBstInOrder(testBst1);
+            //Console.WriteLine("\ntest bst 2: ");
+            //PrintBstInOrder(testBst2);
+            //Console.WriteLine("\ntest bst 3: ");
+            //PrintBstInOrder(testBst3);
+            //Console.WriteLine("\ntest bst 4: ");
+            //PrintBstInOrder(testBst4);
+            //Console.WriteLine("\ntest bst 5: ");
+            //PrintBstInOrder(testBst5);
+
+            Console.WriteLine(rs.RangeSumBST(testBst1, 7, 15)); // Expected: 32
+            Console.WriteLine(rs.RangeSumBST(testBst2, 6, 10)); // Expected: 23
+            Console.WriteLine(rs.RangeSumBST(testBst3, -10, -4)); // Expected: -27
+            Console.WriteLine(rs.RangeSumBST(testBst4, -10, 10)); // Expected: -9
+            Console.WriteLine(rs.RangeSumBST(testBst5, 1000, 1100)); // Expected: 53550
 
             Console.ReadKey();
         }
@@ -56,6 +95,56 @@ namespace LeetCode111
             }
 
             return root;
+        }
+
+        static TreeNode BstGen(int[] vals)
+        {
+            TreeNode root = new TreeNode(vals[0]);
+
+            for (int i = 1; i < vals.Length; i++)
+            {
+                InsertBstVal(root, vals[i]);
+            }
+
+            return root;
+        }
+
+        static void InsertBstVal(TreeNode node, int val)
+        {
+            if (val < node.val)
+            {
+                if (node.left == null)
+                {
+                    node.left = new TreeNode(val);
+                }
+                else
+                {
+                    InsertBstVal(node.left, val);
+                }
+            }
+            else
+            {
+                if (node.right == null)
+                {
+                    node.right = new TreeNode(val);
+                }
+                else
+                {
+                    InsertBstVal(node.right, val);
+                }
+            }
+        }
+
+        static void PrintBstInOrder(TreeNode node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            PrintBstInOrder(node.left);
+            Console.Write(node.val + " ");
+            PrintBstInOrder(node.right);
         }
     }
 }
