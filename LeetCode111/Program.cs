@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace LeetCode111
 {
@@ -21,20 +20,7 @@ namespace LeetCode111
 
             TreeNode testRoot4 = TreeGen(biglist.ToArray());
 
-            Program p = new Program();
             DeepestSum ds = new DeepestSum();
-
-            //p.PrintGivenLevel(testRoot4, 12);
-
-            //p.PrintGivenLevelRecursive(testRoot4, 12);
-
-            //long iterativeTime = Time(() => p.PrintGivenLevel(testRoot4, 12),1000);
-            //long recursiveTime = Time(() => p.PrintGivenLevelRecursive(testRoot4, 12), 1000);
-
-            //Console.WriteLine($"Iterative time was: {iterativeTime}");
-            //Console.WriteLine($"Recursive time was: {recursiveTime}");
-
-            //p.PrintLevelOrder(testRoot2);
 
             Console.WriteLine(ds.DeepestLeavesSum(testRoot0));
             Console.WriteLine(ds.DeepestLeavesSum(testRoot1));
@@ -43,174 +29,6 @@ namespace LeetCode111
             Console.WriteLine(ds.DeepestLeavesSum(testRoot4));
 
             Console.ReadKey();
-        }
-
-        static long Time(Action action, int iterations)
-        {
-            action();
-            Stopwatch s = Stopwatch.StartNew();
-            for (int i = 0; i < iterations; i++)
-            {
-                action();
-            }
-
-            return s.ElapsedMilliseconds;
-        }
-
-        //public int DeepestLeavesSum(TreeNode root)
-        //{
-        //    Queue<Tuple<TreeNode, int>> bfsQueue = new Queue<Tuple<TreeNode, int>>();
-        //    bfsQueue.Enqueue(new Tuple<TreeNode, int>(root, 0));
-
-        //    int deepestDepth = 0;
-        //    int sum = 0;
-
-        //    while (bfsQueue.Count > 0)
-        //    {
-        //        Tuple<TreeNode, int> item = bfsQueue.Dequeue();
-        //        TreeNode node = item.Item1;
-        //        int depth = item.Item2;
-
-        //        if (node.left != null)
-        //        {
-        //            bfsQueue.Enqueue(new Tuple<TreeNode, int>(node.left, depth + 1));
-        //        }
-
-        //        if (node.right != null)
-        //        {
-        //            bfsQueue.Enqueue(new Tuple<TreeNode, int>(node.right, depth + 1));
-        //        }
-
-        //        if (node.left == null && node.right == null)
-        //        {
-        //            if (depth > deepestDepth)
-        //            {
-        //                deepestDepth = depth;
-        //                sum = 0;
-        //            }
-
-        //            sum += node.val;
-        //        }
-        //    }
-
-        //    return sum;
-        //}
-
-        public int DeepestLeavesSum(TreeNode root, int level = 0, List<int> sums = null)
-        {
-            if (root == null)
-            {
-                return 0;
-            }
-
-            if (sums == null)
-            {
-                sums = new List<int>();
-            }
-
-            while (sums.Count < level + 1)
-            {
-                sums.Add(0);
-            }
-
-            sums[level] += root.val;
-
-            DeepestLeavesSum(root.left, level + 1, sums);
-            DeepestLeavesSum(root.right, level + 1, sums);
-
-            return sums[sums.Count - 1];
-        }
-
-
-
-        public void PrintLevelOrder(TreeNode root)
-        {
-            Queue<TreeNode> bfsQueue = new Queue<TreeNode>();
-
-            bfsQueue.Enqueue(root);
-
-            while (bfsQueue.Count > 0)
-            {
-                TreeNode node = bfsQueue.Dequeue();
-                Console.Write(node.val + " ");
-
-                if (node.left != null)
-                {
-                    bfsQueue.Enqueue(node.left);
-                }
-
-                if (node.right != null)
-                {
-                    bfsQueue.Enqueue(node.right);
-                }
-            }
-
-            Console.Write("\n");
-        }
-
-        public void PrintGivenLevel(TreeNode root, int level)
-        {
-            Queue<Tuple<TreeNode, int>> bfsQueue = new Queue<Tuple<TreeNode, int>>();
-            bfsQueue.Enqueue(new Tuple<TreeNode, int>(root, 0));
-
-            while (bfsQueue.Count > 0)
-            {
-                Tuple<TreeNode, int> item = bfsQueue.Dequeue();
-                TreeNode node = item.Item1;
-                int depth = item.Item2;
-
-                if (depth == level)
-                {
-                    //Console.Write(node.val + " ");
-                }
-
-                if (depth > level)
-                {
-                    break;
-                }
-
-                if (node.left != null)
-                {
-                    bfsQueue.Enqueue(new Tuple<TreeNode, int>(node.left, depth + 1));
-                }
-
-                if (node.right != null)
-                {
-                    bfsQueue.Enqueue(new Tuple<TreeNode, int>(node.right, depth + 1));
-                }
-            }
-
-            //Console.Write("\n");
-        }
-
-        /*
-         *  ***Function to print all nodes at a given level***
-            
-            printGivenLevel(tree, level)
-            if tree is NULL then return;
-            if level is 1, then
-                print(tree->data);
-            else if level greater than 1, then
-                printGivenLevel(tree->left, level-1);
-                printGivenLevel(tree->right, level-1);
-        */
-
-        public void PrintGivenLevelRecursive(TreeNode tree, int level)
-        {
-            if (tree == null)
-            {
-                return;
-            }
-
-            if (level == 1)
-            {
-                //Console.Write(tree.val + " ");
-            }
-            else if (level > 1)
-            {
-                PrintGivenLevelRecursive(tree.left, level - 1);
-                PrintGivenLevelRecursive(tree.right, level - 1);
-            }
         }
 
         static TreeNode TreeGen(int?[] vals)
