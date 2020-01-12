@@ -20,6 +20,10 @@ namespace LeetCode111
 
             TreeNode testRoot4 = TreeGen(biglist.ToArray());
 
+            TreeNode testRoot5 = TreeGen(new int?[] { 1, 3, 2, 5 });
+            TreeNode testRoot6 = TreeGen(new int?[] { 2, 1, 3, null, 4, null, 7 });
+            TreeNode expectedTree0 = TreeGen(new int?[] { 3, 4, 5, 5, 4, null, 7 });
+
             TreeNode testBst1 = BstGen(new int[] { 10, 5, 15, 3, 7, 18 });
             TreeNode testBst2 = BstGen(new int[] { 10, 5, 15, 3, 7, 13, 18, 1, 6 });
             TreeNode testBst3 = BstGen(new int[] { -5, -6, -1, -7, -19, -9 });
@@ -66,6 +70,10 @@ namespace LeetCode111
             Console.WriteLine(rs.RangeSumBST(testBst3, -10, -4)); // Expected: -27
             Console.WriteLine(rs.RangeSumBST(testBst4, -10, 10)); // Expected: -9
             Console.WriteLine(rs.RangeSumBST(testBst5, 1000, 1100)); // Expected: 53550
+
+            MergeBinaryTrees mbt = new MergeBinaryTrees();
+
+            Console.WriteLine(TreesMatch(mbt.MergeTrees(testRoot5, testRoot6), expectedTree0));
 
             Console.ReadKey();
         }
@@ -145,6 +153,21 @@ namespace LeetCode111
             PrintBstInOrder(node.left);
             Console.Write(node.val + " ");
             PrintBstInOrder(node.right);
+        }
+
+        static bool TreesMatch(TreeNode a, TreeNode b)
+        {
+            if (a == null && b == null)
+            {
+                return true;
+            }
+
+            if (a == null || b == null || (a.val != b.val))
+            {
+                return false;
+            }
+
+            return TreesMatch(a.left, b.left) && TreesMatch(a.right, b.right);
         }
     }
 }
